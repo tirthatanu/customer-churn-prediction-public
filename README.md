@@ -402,7 +402,7 @@ Requirements:
 
 Clone the repository:
 
-    git clone https://github.com/tirthatanu/customer-churn-prediction.git
+    git clone https://github.com/tirthatanu/customer-churn-prediction-public.git
 
 Open the project:
 
@@ -597,7 +597,7 @@ Possible future enhancements include:
 
 GitHub:
 
-https://github.com/tirthatanu/customer-churn-prediction
+https://github.com/tirthatanu/customer-churn-prediction-public
 
 Project Name:
 
