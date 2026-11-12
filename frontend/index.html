@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Churn Prediction System</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="/script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="logo">CS</div>
+
+                <div>
+                    <h2>ChurnSense</h2>
+                    <p>Customer Churn Prediction System</p>
+                </div>
+
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                ML-Powered Application
+            </div>
+
+        </header>
+
+
+        <!-- Introduction -->
+        <section class="hero">
+
+            <span class="eyebrow">
+                CUSTOMER INTELLIGENCE
+            </span>
+
+            <h1>Customer Churn Prediction</h1>
+
+            <p>
+                Analyze customer subscription information,
+                predict potential churn, and identify
+                customers who may need retention support.
+            </p>
+
+        </section>
+
+
+        <!-- Prediction Workspace -->
+        <div class="workspace">
+
+
+            <!-- Customer Information Form -->
+            <section class="card">
+
+                <div class="card-heading">
+                    <h2>Customer Information</h2>
+                    <p>
+                        Enter the customer's subscription details.
+                    </p>
+                </div>
+
+                <form id="predictionForm">
+
+                    <div class="form-grid">
+
+                        <!-- Tenure -->
+                        <div class="form-group">
+
+                            <label for="tenure">
+                                Tenure (Months)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="tenure"
+                                name="tenure"
+                                min="0"
+                                step="1"
+                                placeholder="e.g. 12"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Monthly Charges -->
+                        <div class="form-group">
+
+                            <label for="monthly_charges">
+                                Monthly Charges
+                            </label>
+
+                            <input
+                                type="number"
+                                id="monthly_charges"
+                                name="monthly_charges"
+                                min="0"
+                                step="0.01"
+                                placeholder="e.g. 75.50"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Total Charges -->
+                        <div class="form-group">
+
+                            <label for="total_charges">
+                                Total Charges
+                            </label>
+
+                            <input
+                                type="number"
+                                id="total_charges"
+                                name="total_charges"
+                                min="0"
+                                step="0.01"
+                                placeholder="e.g. 906.00"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Contract Type -->
+                        <div class="form-group">
+
+                            <label for="contract">
+                                Contract Type
+                            </label>
+
+                            <select
+                                id="contract"
+                                name="contract"
+                                required
+                            >
+
+                                <option value="">
+                                    Select contract
+                                </option>
+
+                                <option value="Month-to-month">
+                                    Month-to-month
+                                </option>
+
+                                <option value="One year">
+                                    One year
+                                </option>
+
+                                <option value="Two year">
+                                    Two year
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Internet Service -->
+                        <div class="form-group full-width">
+
+                            <label for="internet_service">
+                                Internet Service
+                            </label>
+
+                            <select
+                                id="internet_service"
+                                name="internet_service"
+                                required
+                            >
+
+                                <option value="">
+                                    Select internet service
+                                </option>
+
+                                <option value="DSL">
+                                    DSL
+                                </option>
+
+                                <option value="Fiber optic">
+                                    Fiber optic
+                                </option>
+
+                                <option value="No">
+                                    No internet service
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Form Buttons -->
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            id="predictButton"
+                            class="btn btn-primary"
+                        >
+                            Predict Customer Churn
+                        </button>
+
+                        <button
+                            type="button"
+                            id="sampleButton"
+                            class="btn btn-secondary"
+                        >
+                            Load Sample
+                        </button>
+
+                        <button
+                            type="reset"
+                            class="btn btn-outline"
+                        >
+                            Clear
+                        </button>
+
+                    </div>
+
+
+                    <!-- Form Messages -->
+                    <p
+                        id="formMessage"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+
+                </form>
+
+            </section>
+
+
+
+            <!-- Prediction Results -->
+            <section class="card results-card">
+
+                <div class="card-heading">
+
+                    <h2>Prediction Results</h2>
+
+                    <p>
+                        Machine learning risk assessment.
+                    </p>
+
+                </div>
+
+
+                <!-- Initial Empty State -->
+                <div id="emptyResult" class="empty-result">
+
+                    <div class="empty-icon">◎</div>
+
+                    <h3>Ready for Prediction</h3>
+
+                    <p>
+                        Enter customer information and
+                        click Predict Customer Churn
+                        to see results.
+                    </p>
+
+                </div>
+
+
+                <!-- Prediction Output -->
+                <div id="predictionResult" hidden>
+
+                    <div class="result-heading">
+
+                        <div>
+
+                            <p class="result-label">
+                                Predicted Customer Status
+                            </p>
+
+                            <h2 id="predictionLabel">
+                                —
+                            </h2>
+
+                        </div>
+
+                        <span
+                            id="riskBadge"
+                            class="risk-badge"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <!-- Churn Probability -->
+                    <div class="probability-section">
+
+                        <p>Churn Model Score</p>
+
+                        <h2 id="probabilityValue">
+                            0%
+                        </h2>
+
+                        <div
+                            id="probabilityMeter"
+                            class="progress-bar"
+                            role="progressbar"
+                            aria-label="Churn score"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            aria-valuenow="0"
+                        >
+
+                            <div id="probabilityFill"></div>
+
+                        </div>
+
+                        <div class="progress-labels">
+
+                            <span>0%</span>
+                            <span>50%</span>
+                            <span>100%</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <p id="resultDescription"></p>
+
+                </div>
+
+
+                <!-- Disclaimer -->
+                <div class="disclaimer">
+
+                    Risk categories use provisional thresholds.
+                    Scores from the balanced model are not yet
+                    probability-calibrated.
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+
+        <!-- Machine Learning Model Information -->
+        <section class="card model-card">
+
+            <div class="card-heading">
+
+                <h2>Machine Learning Model</h2>
+
+                <p>
+                    Current model information and performance.
+                </p>
+
+            </div>
+
+
+            <div class="model-stats">
+
+                <div class="stat">
+
+                    <span>Model</span>
+
+                    <strong id="modelName">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <span>Accuracy</span>
+
+                    <strong id="modelAccuracy">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <span>Recall</span>
+
+                    <strong id="modelRecall">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <span>F1-score</span>
+
+                    <strong id="modelF1">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Prediction History -->
+        <section class="card history-card">
+
+            <div class="history-heading">
+
+                <div>
+
+                    <h2>Recent Predictions</h2>
+
+                    <p id="historyCount">
+                        Loading prediction history...
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="refreshButton"
+                    class="btn btn-secondary"
+                >
+                    Refresh History
+                </button>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+                            <th>Tenure</th>
+                            <th>Contract</th>
+                            <th>Churn Score</th>
+                            <th>Risk</th>
+                            <th>Prediction</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="historyBody">
+
+                        <tr>
+
+                            <td colspan="6">
+                                Loading...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Footer -->
+        <footer>
+
+            Customer Churn Prediction System
+
+            <span>
+                Python · Scikit-learn · FastAPI · SQLite
+            </span>
+
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

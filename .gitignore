@@ -1,0 +1,59 @@
+
+# Git Ignore Configuration
+# ========================
+
+# Python Virtual Environments
+.venv/
+venv/
+env/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Pytest Cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment Variables and Secrets
+.env
+.env.*
+!.env.example
+
+# SQLite Databases
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Customer Data Protection
+# Ignore all files inside data except .gitkeep.
+# The public repository must not contain customer CSVs.
+# The application creates its SQLite database at runtime.
+/data/*
+!/data/.gitkeep
+
+# VS Code and IDE Settings
+.vscode/
+.idea/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary Files
+*.tmp
+*.bak
+
+# Build Artifacts
+build/
+dist/
+*.egg-info/

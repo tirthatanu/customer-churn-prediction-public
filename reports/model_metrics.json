@@ -1,0 +1,31 @@
+{
+    "model_name": "Balanced Logistic Regression",
+    "model_version": "1.0",
+    "selection_method": "5-fold CV F1-score",
+    "training_samples": 5634,
+    "testing_samples": 1409,
+    "total_samples": 7043,
+    "features": [
+        "tenure",
+        "monthly_charges",
+        "total_charges",
+        "contract",
+        "internet_service"
+    ],
+    "target": "Churn",
+    "prediction_threshold": 0.5,
+    "accuracy": 0.7239176721078779,
+    "precision": 0.4878048780487805,
+    "recall": 0.8021390374331551,
+    "f1_score": 0.6066734074823054,
+    "confusion_matrix": [
+        [
+            720,
+            315
+        ],
+        [
+            74,
+            300
+        ]
+    ]
+}

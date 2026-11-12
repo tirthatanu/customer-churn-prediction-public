@@ -1,0 +1,66 @@
+
+# Docker Ignore Configuration
+# ===========================
+
+# Git Repository
+.git
+.gitignore
+
+# Python Virtual Environments
+.venv/
+venv/
+env/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Testing and Coverage Files
+.pytest_cache/
+.coverage
+htmlcov/
+tests/
+
+# Environment Variables and Secrets
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Customer Data
+# Never copy original or cleaned datasets into Docker
+data/*
+!data/.gitkeep
+**/*.csv
+
+# Local Databases
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Development Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs and Temporary Files
+*.log
+*.tmp
+*.bak
+*.zip
+
+# Documentation and Screenshots
+screenshots/
+
+# Build Artifacts
+build/
+dist/
+*.egg-info/
